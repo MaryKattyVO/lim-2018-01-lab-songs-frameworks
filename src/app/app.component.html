@@ -1,0 +1,24 @@
+<nav class="navbar navbar-dark  bg-primary">
+  <a href="/" class="navbar-brand">Top List Song</a>
+</nav>
+
+<div class="container p-4">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <h3 class="card-header">Buscar por artista</h3>
+        <form action="">
+          <form class="card-body">
+            <label for="title">Title:</label>
+            <input type="text" name="title" class="form-control" autofocus #title>
+            <label for="title">Link:</label>
+            <input type="text" name="link" class="form-control" autofocus #link>
+          <button (click)="addLink(title, link)" class="btn btn-primary mt-4">
+            Buscar
+          </button>
+          </form>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
