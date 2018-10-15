@@ -7,8 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'song';
-  addLink(title, link){
-    console.log("value:",title.value, link.value);
-    return false;
-  }
+
 }
