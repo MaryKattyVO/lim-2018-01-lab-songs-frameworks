@@ -1,40 +1,65 @@
-<nav class="navbar navbar-dark  bg-primary">
-  <a href="/" class="navbar-brand">Top List Song</a>
+<nav class="navbar navbar-dark bg-primary">
+  <a class="navbar-brand" href="/">TU MÚSICA</a>
 </nav>
+<div class="container mt-5 text-center">
+  <h1>TOP 10 DE TUS ARTISTAS </h1>
+  <div class="card mt-5">
+    <div class="card-body">
 
-<div class="container p-4">
-  <div class="row">
-    <div class="col-md-8">
-      <div class="card">
-        <h3 class="card-header">Buscar por artista</h3>
-        <form action="">
-          <form class="card-body">
-            <label >Artista</label>
-            <input type="text"  class="form-control" name="searchArtist" [(ngModel)]="searchArtist" >
-            <button (click)="getArtistTrack()" class="btn btn-primary mt-4">
-            Buscar
+      <form (ngSubmit)="onSong()">
+
+        <!-- Caja texto: Ingresar artista a buscar -->
+        <div class="row">
+          <div class="form-group col-md-8">
+            <input type="text" class="form-control" name="searchNameArtist" [(ngModel)]="searchNameArtist" placeholder="Ingresa nombre del artista">
+          </div>
+          <!-- Boton buscar  -->
+          <button class="btn btn-secondary col-md-2" type="submit">
+            <i class="fas fa-search text-black"></i> Buscar
           </button>
-          </form>
-        </form>
-      </div>
+          <!-- boton resetear -->
+          <button class="btn btn-danger col-md-2 btn-sm" type="reset" (click)="reset()">
+            <i class="fas fa-broom text"></i> Limpiar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Nombre e imagen del artista -->
+<div class="container item-center mt-4 text-center">
+  <div class="row">
+    <div class="col-4 mx-auto">
+      <h3>{{artist.name}}</h3>
+      <img src="{{artist.image}}" class="rounded" alt="">
     </div>
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div clas="col-md-8 text-center">      
-      {{nombre}} 
-      
-      
-    </div>
+<!-- tabla top 10 de canciones -->
+<div class="container mt-4 text-center" *ngIf="topSong" >
+  <h2>LISTA DE CANCIONES TOP 10</h2>
+  <table class="table table-hover mt-5">
 
-    <div>
-        <!-- {{imagen}} -->
-    </div>
-    <div>
-      <img src="{{imagen}}"> 
-    </div>
+    <!-- Títulos de la tabla -->
+    <thead class="thead-primary bg-primary " ng-controller="votesController">
+      <tr>
+        <th scope="col" style="color:#ffff">Ranking</th>
+        <th scope="col" style="color:#ffff">Canciones</th>
+        <th scope="col" style="color:#ffff">Me Gusta</th>
+        <th scope="col" style="color:#ffff" colspan="2">Tu Voto</th>
+      </tr>
+    </thead>
 
-  </div>
+    <!-- Contenido de la tabla -->
+    <tbody *ngFor="let track of ranking, index as i">
+      <tr>
+        <th scope="row">{{ i + 1 }}</th>
+        <td class="text-center">{{ track.name }}</td>
+        <td>{{ track.like }}</td>
+        <td><button (click)="like(track)" class="btn btn-warning"><i class="far fa-thumbs-up text-dark"></i></button></td>
+        <td><button (click)="dislike(track)" class="btn btn-danger"><i class="far fa-thumbs-down text-white"></i></button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
