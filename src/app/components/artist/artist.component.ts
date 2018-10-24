@@ -11,7 +11,6 @@ import { SongInterface } from '../../models/songs-interfaces';
   styleUrls: ['./artist.component.css']
 })
 export class ArtistComponent {
-
   searchNameArtist: string;
   topSong: boolean;
 
@@ -21,7 +20,10 @@ export class ArtistComponent {
     image: '',
   }
 
+  array1 : any[];
   ranking: SongInterface[] = [
+
+ { name: '', listeners: 0, like: 0, dislike: 0 }, 
     { name: '', listeners: 0, like: 0, dislike: 0 },
     { name: '', listeners: 0, like: 0, dislike: 0 },
     { name: '', listeners: 0, like: 0, dislike: 0 },
@@ -30,8 +32,7 @@ export class ArtistComponent {
     { name: '', listeners: 0, like: 0, dislike: 0 },
     { name: '', listeners: 0, like: 0, dislike: 0 },
     { name: '', listeners: 0, like: 0, dislike: 0 },
-    { name: '', listeners: 0, like: 0, dislike: 0 },
-    { name: '', listeners: 0, like: 0, dislike: 0 }]
+    { name: '', listeners: 0, like: 0, dislike: 0 }  ]
  
 // Evento al ejecutar formulario  
   onSong() {
@@ -44,25 +45,28 @@ export class ArtistComponent {
 
     this.api.showSong(this.searchNameArtist, 'gettoptracks')
       .subscribe((res: any) => {
-        for (let i = 0; i < this.ranking.length; i++) {
-          this.ranking[i].name = res.toptracks.track[i].name;
-          this.ranking[i].listeners = res.toptracks.track[i].listeners;
 
+              
+ for (let i = 0; i < this.ranking.length; i++) {
+         this.ranking[i].name = res.toptracks.track[i].name;
+           this.ranking[i].listeners = res.toptracks.track[i].listeners;
           this.ranking[i].like = res.toptracks.track[i].listeners;
-        }
+          /* this.name1  = res.toptracks.track[i].name; 
+          console.log(this.name1);*/
+        } 
       });
   }
 
   like(music) {
     let contador = 0;
-    const index = this.ranking.indexOf(music);
-    contador = this.ranking[index].like++;
+    const c = this.ranking.indexOf(music);
+    contador = this.ranking[c].like++;
   }
 
   dislike(music) {
     let contador = 0;
-    const index = this.ranking.indexOf(music);
-    contador = this.ranking[index].like--;
+    const c = this.ranking.indexOf(music);
+    contador = this.ranking[c].like--;
   }
 
   reset() {
